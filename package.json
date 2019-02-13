@@ -1,7 +1,7 @@
 {
   "name": "travrs",
-  "version": "1.0.0-alpha.1",
-  "description": "Helper library to for creating DOM structures from string templates",
+  "version": "1.0.0-alpha.2",
+  "description": "Helper library for creating DOM structures from string templates",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

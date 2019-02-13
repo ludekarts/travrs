@@ -1,18 +1,24 @@
 # travrs
-Helper library to for creating DOM structures from string templates
+Helper library for creating DOM structures from string templates.
 
 
 ## Instalation
 
+#### With NPM
 ```
 npm install -save travrs
+```
+
+#### With Browser
+```
+<script src="https://unpkg.com/travrs@1.0.0-alpha.2" charset="utf-8"></script>
 ```
 
 
 ## API
 
-- **createElement(selector, children?)** (named import) - creates single DOM element.
-- **template(structure)** (default import) - creates DOM structure base on the string template.
+- **createElement(selector, children?)** - creates single DOM element.
+- **template(structure)** - creates DOM structure base on the string template.
 
 
 ## Usage
@@ -28,7 +34,7 @@ Travrs uses CSS-like abbreviation syntax for creating DOM nodes.
 Travrs uses indentation to detect parent-child relation between noeds.
 
 ```
-import template from "travrs";
+import {template} from "travrs";
 
 const element = template(`
   div.hello
@@ -44,7 +50,7 @@ document.querySelector("body").appendChild(element);
 Using `@referenceName::` in your template string you can retrive this *tagged* node from **template()** function:
 
 ```
-import template from "travrs";
+import {template} from "travrs";
 
 const [element, refs] = template(`
   div.hello
