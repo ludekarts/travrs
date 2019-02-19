@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>travrs.js test</title>
+    <script src="../dist/index.js" charset="utf-8"></script>
+    <style media="screen">
+      * {font-family: sans-serif;}
+    </style>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+    const {template, createElement, insert} = travrs;
+    const body = document.querySelector("body");
+
+
+    // ---- createElement() ----------------
+
+    body.appendChild(createElement("h2", "createElement() tests"));
+
+    // Create <div> with content.
+    const div = createElement("div", "Div with content");
+    body.appendChild(div);
+
+    // Create <div> with id.
+    const div2 = createElement("div#divOne", "Div with id");
+    body.appendChild(div2);
+
+    // Create <div> with classes.
+    const div3= createElement("div.classOne.classTwo", "Div with classes");
+    body.appendChild(div3);
+
+    // Create <div> with multiple attributes.
+    const div4 = createElement("div[data-test=\"true\" aria-label=\"test div 4\"]", "Div with mutiple attributes");
+    body.appendChild(div4);
+
+    // Create <div> with combined attributes.
+    const div5 = createElement("div#divFive.classOne.classTwo[data-test=\"true\" aria-label=\"test div 5\"]", "Div with combined attributes");
+    body.appendChild(div5);
+
+
+    // ---- template() ----------------
+
+    body.appendChild(createElement("h2", "template() tests"));
+
+    const scaffold = template(`
+      div.container
+        h3 > "Simple structure"
+        p > "subtitles "
+         span > "span after text"
+    `);
+
+    body.appendChild(scaffold);
+
+    const scaffold2 = template(`
+      div.container
+        h3#headId > "Simple structure with attributes"
+        div.classOne.classTwo
+          p[aria-label="line one"] > "line one"
+          p[aria-label="line two"] > "line two"
+        div.classThree > "sibling"
+    `);
+
+    body.appendChild(scaffold2);
+
+    const [scaffold3, refs] = template(`
+      div.container
+        h3#headId > "Simple structure with references"
+        div.classOne.classTwo
+          p[aria-label="line one"] > "line one "
+            @emph::strong#strongId > "emphasis"
+          p[aria-label="line two"] > "line two "
+        div.classThree > "sibling"
+    `);
+
+    window.travrs_test_ref = refs.emph;
+
+    body.appendChild(scaffold3);
+
+
+    const scaffold4 = template(`
+      div.container
+        h3 > "Deep structure"
+        div > "level 0"
+          div.sibling > "level 1"
+            div > "level 2"
+              div > "level 3"
+          div.sibling > "level 1"
+        div > "level 0"
+    `);
+
+    body.appendChild(scaffold4);
+
+    // ---- insert() ----------------
+
+    body.appendChild(createElement("h2", "insert() tests"));
+
+    const externalNode = createElement("button.insert[aria-label=\"remove-button\"]", "click to remove this button");
+    externalNode.onclick = event => event.target.parentNode.removeChild(event.target);
+    const scaffold5 = template(`
+      div.container
+        h3#headId > "Simple structure with inserted external node"
+        div.classOne.classTwo
+          p[aria-label="line one"] > "line one"
+          p[aria-label="line two"] > "line two"
+            ${insert(externalNode)}
+        div.classThree > "sibling"
+    `);
+
+    body.appendChild(scaffold5);
+  </script>
+</html>

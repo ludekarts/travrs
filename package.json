@@ -1,10 +1,11 @@
 {
   "name": "travrs",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Helper library for creating DOM structures from string templates",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testcafe chrome:headless ./test/test.js",
+    "build": "parcel build index.js --global travrs --out-file ./dist/index.js --no-source-maps"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ludekarts/travrs/issues"
   },
-  "homepage": "https://github.com/ludekarts/travrs#readme"
+  "homepage": "https://github.com/ludekarts/travrs#readme",
+  "devDependencies": {
+    "parcel": "^1.11.0",
+    "testcafe": "^1.0.0"
+  }
 }
